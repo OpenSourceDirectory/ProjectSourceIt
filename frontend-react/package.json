@@ -11,9 +11,13 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "antd": "^5.17.0",
+    "axios": "^1.6.8",
+    "mobx": "^6.12.3",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "styled-components": "^6.1.9"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.3",
