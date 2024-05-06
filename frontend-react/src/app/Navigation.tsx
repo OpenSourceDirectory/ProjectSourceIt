@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import type { MenuProps } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import { ThemeContext } from './page';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -52,13 +53,18 @@ const items: MenuItem[] = [
 
 const Navigation: React.FC = () => {
     const [current, setCurrent] = useState('mail');
+    const theme = useContext(ThemeContext);
   
     const onClick: MenuProps['onClick'] = (e) => {
       console.log('click ', e);
       setCurrent(e.key);
     };
   
-    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+    return (
+        <div style={{backgroundColor: theme === 'light' ? 'white' : '#23283e'}}>
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{backgroundColor: theme === 'light' ? 'white' : '#23283e'}} />
+        </div>
+    );
   };
 
   export default Navigation;
