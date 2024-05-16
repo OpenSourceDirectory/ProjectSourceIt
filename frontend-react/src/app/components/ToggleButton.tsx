@@ -1,11 +1,16 @@
+import { ThemeType } from '../styles/ColorPallet';
 import './ToggleButton.css';
 
-const ToggleBtn = ({ themeName, toggleTheme }:
-	{ themeName: string, toggleTheme: () => void }
-) => {
+const ToggleButton = ({
+	themeType,
+	toggleTheme
+}:{
+	themeType: ThemeType,
+	toggleTheme: () => void
+}) => {
 	return (
 		<button type="button" onClick={toggleTheme} className="btn btn--icon" aria-label="toggle theme">
-			{themeName === 'dark' ? (
+			{themeType === ThemeType.dark ? (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -30,4 +35,4 @@ const ToggleBtn = ({ themeName, toggleTheme }:
 	);
 };
 
-export default ToggleBtn;
+export default ToggleButton;

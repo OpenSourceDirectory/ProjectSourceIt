@@ -1,38 +1,37 @@
 import styled, { ThemeProvider } from 'styled-components';
-import { ThemeOption } from './page';
 import { Title } from './components/Title';
 import { IPallet } from './styles/ColorPallet';
+import { Navigation } from './Navigation';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
     width: 100%;
+    background: ${props => props.theme.base};
     display: flex;
     flex-direction: row;
 `;
 
 const TopRow = styled.div`
-    min-height: 300px;
-    max-height: 500px;
+    min-height: 250px;
+    max-height: 300px;
     width: 100%;
-    height: 20%;
+    height: 15%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 `;
 
 const BottomRow = styled.div`
     height: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 `;
 
 const TitleColumn = styled.div`
-    width: 60%;
-    min-width: 500px;
+    width: 70%;
 `;
 
 const NavigationColumn = styled.div`
-    width: 40%;
-    min-width: 200px;
+    width: 30%;
 `;
 
 
@@ -50,7 +49,7 @@ export const PageLayout = ({
                     </TitleColumn>
 
                     <NavigationColumn>
-                        {/* <Navigation theme={theme} /> */}
+                        <Navigation themeType={theme.type} toggleTheme={toggleTheme} />
                     </NavigationColumn>
                 </TopRow>
 

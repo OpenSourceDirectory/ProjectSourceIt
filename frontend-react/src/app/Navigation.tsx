@@ -1,34 +1,51 @@
-// Potentially remove. Leave in for now.
+import styled from 'styled-components';
+import { ThemeType } from './styles/ColorPallet';
+import ToggleButton from './components/ToggleButton';
 
-import React, { useContext, useState } from 'react';
-import { ThemeContext } from './page';
-import { BrowserRouter, Route, Link, Routes, Navigate } from 'react-router-dom';
+const NavigationWrapper = styled.div`
+    height: 100%;
+    width: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+`;
 
-const Home = () => <div>Home</div>;
-const About = () => <div>About</div>;
-const Contact = () => <div>Contact</div>;
-const ProblemPage = () => <div>ProblemPage</div>;
+const NavigationList = styled.div`
+`;
 
-const Navigation: React.FC = () => {
-  const [current, setCurrent] = useState('mail');
-  const theme = useContext(ThemeContext);
+export enum FocusAreaTypes {
+    About,
+    Login,
+    Account,
+    FeatureProjects,
+    WatchedProjects
+}
 
-  return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
-      </nav>
+export const Navigation = ({
+    themeType,
+    toggleTheme,
+    // focusAreaDisplay,
+    // setFocusAreaDisplay
+}:{
+    themeType: ThemeType,
+    toggleTheme: () => void,
+    // focusAreaDisplay: FocusAreaTypes;
+    // setFocusAreaDisplay: (type: FocusAreaTypes) => void;
+}) => {
+    const options = Object.values(FocusAreaTypes).filter((t: any) => typeof t === 'string' || t instanceof String);
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path='*' element={<ProblemPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+    return (
+        <NavigationWrapper>
+            <NavigationList>
+                {options.map(o => {
+                    return (<div>
+                        {o}
+                    </div>)
+                })}
+            </NavigationList>
 
-export default Navigation;
+            <ToggleButton themeType={themeType} toggleTheme={toggleTheme} />
+        </NavigationWrapper>
+    )
+}

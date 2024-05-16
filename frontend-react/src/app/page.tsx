@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useState } from 'react';
-import './App.css';
 import { PageLayout } from './PageLayout';
 import { DarkPallet, IPallet, LightPallet, ThemeType } from './styles/ColorPallet';
 
