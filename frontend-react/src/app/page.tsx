@@ -1,27 +1,23 @@
 'use client'
 
-import Navigation from "./Navigation";
 import { createContext, useState } from 'react';
 import './App.css';
-import ToggleBtn from './components/ToggleButton';
+import { PageLayout } from './PageLayout';
+import { DarkPallet, IPallet, LightPallet, ThemeType } from './styles/ColorPallet';
 
-export const ThemeContext = createContext('light');
+export const ThemeContext = createContext(LightPallet);
 
+// TODO get default theme from browser and apply that one.
 export default function App() {
-	const [theme, setTheme] = useState('light');
+	const [theme, setTheme] = useState<IPallet>(LightPallet);
+
+	function handleToggleTheme() {
+		setTheme(prevTheme => prevTheme.type === ThemeType.dark ? LightPallet : DarkPallet);
+	}
 	
 	return (
 		<ThemeContext.Provider value={theme}>
-			<div className={`${theme} app`}>
-				<div className="card">
-					<Navigation />
-					<div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-						<ToggleBtn themeName={theme} toggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')} />
-					</div>
-					<h1>Toggle Theme App</h1>
-					<h4>Dark Mode is {theme === 'dark' ? 'On' : 'Off'}</h4>
-				</div>
-			</div>
+			<PageLayout theme={theme} toggleTheme={handleToggleTheme} />
 		</ThemeContext.Provider>
 	);
 }

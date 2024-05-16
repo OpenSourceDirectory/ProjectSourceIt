@@ -1,3 +1,5 @@
+// Potentially remove. Leave in for now.
+
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from './page';
 import { BrowserRouter, Route, Link, Routes, Navigate } from 'react-router-dom';
@@ -23,7 +25,7 @@ const Navigation: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path='*' element={<Navigate to='/' />} />
+        <Route path='*' element={<ProblemPage />} />
       </Routes>
     </BrowserRouter>
   );
