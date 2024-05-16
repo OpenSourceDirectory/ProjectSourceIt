@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { ThemeType } from './styles/ColorPallet';
-import ToggleButton from './components/ToggleButton';
 
 const NavigationWrapper = styled.div`
     height: 100%;
@@ -23,13 +21,9 @@ export enum FocusAreaTypes {
 }
 
 export const Navigation = ({
-    themeType,
-    toggleTheme,
     // focusAreaDisplay,
     // setFocusAreaDisplay
 }:{
-    themeType: ThemeType,
-    toggleTheme: () => void,
     // focusAreaDisplay: FocusAreaTypes;
     // setFocusAreaDisplay: (type: FocusAreaTypes) => void;
 }) => {
@@ -44,8 +38,6 @@ export const Navigation = ({
                     </div>)
                 })}
             </NavigationList>
-
-            <ToggleButton themeType={themeType} toggleTheme={toggleTheme} />
         </NavigationWrapper>
     )
 }

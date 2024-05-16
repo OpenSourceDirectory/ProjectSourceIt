@@ -6,6 +6,7 @@
     font-size: 0.9rem;
     text-transform: lowercase;
     transition: transform 0.2s ease-in-out;
+    height: 30px;
   }
   
   .btn--icon {

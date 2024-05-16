@@ -2,6 +2,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Title } from './components/Title';
 import { IPallet } from './styles/ColorPallet';
 import { Navigation } from './Navigation';
+import ToggleButton from './components/ToggleButton';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -18,12 +19,14 @@ const TopRow = styled.div`
     height: 15%;
     display: flex;
     flex-direction: row;
+    padding: 12px;
 `;
 
 const BottomRow = styled.div`
     height: 80%;
     display: flex;
     flex-direction: row;
+    padding: 12px;
 `;
 
 const TitleColumn = styled.div`
@@ -43,20 +46,22 @@ export const PageLayout = ({
     return (
         <ThemeProvider theme={theme}>
             <PageLayoutWrapper>
-                <TopRow>
-                    <TitleColumn>
-                        <Title />
-                    </TitleColumn>
+                    <TopRow>
+                        <TitleColumn>
+                            <Title />
+                        </TitleColumn>
 
-                    <NavigationColumn>
-                        <Navigation themeType={theme.type} toggleTheme={toggleTheme} />
-                    </NavigationColumn>
-                </TopRow>
+                        <NavigationColumn>
+                            <Navigation />
+                        </NavigationColumn>
 
-                <BottomRow>
+                        <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
+                    </TopRow>
+
+                    <BottomRow>
 
 
-                </BottomRow>
+                    </BottomRow>
 
             </PageLayoutWrapper>
         </ThemeProvider>
