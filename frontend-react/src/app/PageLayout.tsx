@@ -1,8 +1,9 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { Title } from './components/Title';
 import { IPallet } from './styles/ColorPallet';
-import { Navigation } from './Navigation';
+import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
+import { useState } from 'react';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -40,6 +41,8 @@ export const PageLayout = ({
 }:{ 
     theme: IPallet, toggleTheme: () => void
 }) => {
+    const [focusArea, setFocusArea] = useState<FocusAreaTypes>(FocusAreaTypes.About);
+
     return (
         <ThemeProvider theme={theme}>
             <PageLayoutWrapper>
@@ -49,7 +52,7 @@ export const PageLayout = ({
                         </Column>
 
                         <Column $widthPerc={30}>
-                            <Navigation />
+                            <Navigation focusAreaDisplay={focusArea} setFocusAreaDisplay={setFocusArea} />
                         </Column>
 
                         <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
@@ -63,7 +66,7 @@ export const PageLayout = ({
                         <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
 
                         <Column $widthPerc={65}>
-                            {'Focus area'}
+                            {NavigationItems[focusArea].text}
                         </Column>
 
                     </BottomRow>

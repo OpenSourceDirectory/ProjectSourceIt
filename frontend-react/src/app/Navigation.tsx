@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const NavigationWrapper = styled.div`
@@ -16,9 +17,9 @@ const NavigationList = styled.ul`
     text-align: center;
 `;
 
-const NavigationItem = styled.div`
-    font-weight: 600;
-    font-size: 22px;
+const NavigationItem = styled.div<{ $isSelected: boolean }>`
+    font-weight: ${p => p.$isSelected ? 600 : 500};
+    font-size: ${p => p.$isSelected ? 22 : 20}px;
     padding: 2px 5px;
     margin-left: auto;
     margin-right: auto;
@@ -35,23 +36,44 @@ export enum FocusAreaTypes {
     About,
     Login,
     Account,
-    FeatureProjects,
+    FeaturedProjects,
     WatchedProjects
 }
 
+export const NavigationItems = [
+    {type: FocusAreaTypes.About, text: 'About'},
+    {type: FocusAreaTypes.Login, text: 'Login'},
+    {type: FocusAreaTypes.Account, text: 'Account'},
+    {type: FocusAreaTypes.FeaturedProjects, text: 'Featured Projects'},
+    {type: FocusAreaTypes.WatchedProjects, text: 'Watched Projects'}
+]
+
 export const Navigation = ({
-    // focusAreaDisplay,
-    // setFocusAreaDisplay
+    focusAreaDisplay,
+    setFocusAreaDisplay
 }:{
-    // focusAreaDisplay: FocusAreaTypes;
-    // setFocusAreaDisplay: (type: FocusAreaTypes) => void;
+    focusAreaDisplay: FocusAreaTypes;
+    setFocusAreaDisplay: (type: FocusAreaTypes) => void;
 }) => {
-    const options = Object.values(FocusAreaTypes).filter((t: any) => typeof t === 'string' || t instanceof String);
+    const [selectedPage, setSelectedPage] = useState<FocusAreaTypes>(FocusAreaTypes.About);
+
+    const handleNavigationClick = (item: FocusAreaTypes) => {
+        setSelectedPage(item);
+        setFocusAreaDisplay(item);
+    }
 
     return (
         <NavigationWrapper>
             <NavigationList>
-                {options.map(o => <NavigationItem>{o}</NavigationItem>)}
+                {NavigationItems.map(i => {
+                    return (
+                        <NavigationItem
+                            $isSelected={selectedPage === i.type}
+                            onClick={() => handleNavigationClick(i.type)}>
+                            {i.text}
+                        </NavigationItem>
+                    )
+                })}
             </NavigationList>
         </NavigationWrapper>
     )
