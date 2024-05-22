@@ -9,32 +9,29 @@ const PageLayoutWrapper = styled.div`
     width: 100%;
     background: ${props => props.theme.base};
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `;
 
 const TopRow = styled.div`
-    min-height: 250px;
-    max-height: 300px;
-    width: 100%;
-    height: 15%;
+    min-height: 150px;
+    max-height: 250px;
+    width: 98%;
+    height: 10%;
     display: flex;
     flex-direction: row;
-    padding: 12px;
+    margin: 12px;
 `;
 
 const BottomRow = styled.div`
-    height: 80%;
+    height: 90%;
     display: flex;
     flex-direction: row;
-    padding: 12px;
+    margin: 12px;
 `;
 
-const TitleColumn = styled.div`
-    width: 70%;
-`;
-
-const NavigationColumn = styled.div`
-    width: 30%;
+const Column = styled.div<{ $widthPerc: Number }>`
+    width: ${p => p.$widthPerc.toString()}%;
+    margin: 0px 12px;
 `;
 
 
@@ -47,19 +44,27 @@ export const PageLayout = ({
         <ThemeProvider theme={theme}>
             <PageLayoutWrapper>
                     <TopRow>
-                        <TitleColumn>
+                        <Column $widthPerc={70}>
                             <Title />
-                        </TitleColumn>
+                        </Column>
 
-                        <NavigationColumn>
+                        <Column $widthPerc={30}>
                             <Navigation />
-                        </NavigationColumn>
+                        </Column>
 
                         <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
                     </TopRow>
 
                     <BottomRow>
+                        <Column $widthPerc={35}>
+                            {'Feature Projects'}
+                        </Column>
+                        
+                        <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
 
+                        <Column $widthPerc={65}>
+                            {'Focus area'}
+                        </Column>
 
                     </BottomRow>
 

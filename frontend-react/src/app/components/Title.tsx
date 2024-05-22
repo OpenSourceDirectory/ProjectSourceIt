@@ -1,20 +1,20 @@
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 const TitleWrapper = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 12px;
 `;
 
 const TitleText = styled.div`
     height: 65%;
     width: 100%;
 
-    color: ${props => props.theme.primary};
+    color: ${p => p.theme.primary};
     font-size: 80px;
     font-weight: 800;
+    display: block;
 `;
 
 const Squiggle = styled.div`
@@ -23,7 +23,7 @@ const Squiggle = styled.div`
     height: 35px;
     width: 100%;
 
-    background: ${props => props.theme.secondary};
+    background: ${p => p.theme.secondary};
     margin: 12px 0px;
 `;
 
