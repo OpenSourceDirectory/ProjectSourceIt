@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Component } from 'react';
 import styled from 'styled-components';
 import FlipMove from 'react-flip-move';
 
@@ -54,48 +54,63 @@ export const NavigationItems = [
     { type: FocusAreaTypes.WatchedProjects, text: 'Watched Projects' }
 ]
 
-export const Navigation = ({
-    focusAreaDisplay,
-    setFocusAreaDisplay
-}: {
+interface NavigationState {
+    orderedNavigationItems: NavigationItem[];
+    selectedPage: FocusAreaTypes;
+}
+
+interface NavigationProps {
     focusAreaDisplay: FocusAreaTypes;
     setFocusAreaDisplay: (type: FocusAreaTypes) => void;
-}) => {
-    const [selectedPage, setSelectedPage] = useState<FocusAreaTypes>(FocusAreaTypes.About);
-    const [orderedNavigationItems, setOrderedNavigationItems] = useState<NavigationItem[]>(NavigationItems);
+}
 
-    const handleNavigationClick = (item: FocusAreaTypes) => {
-        setOrderedNavigationItems([
-            NavigationItems.find(i => i.type === item)!,
-            ...orderedNavigationItems.filter(i => i.type !== item)
-        ]);
-        setSelectedPage(item);
-        setFocusAreaDisplay(item);
+export class Navigation extends Component<NavigationProps, NavigationState> {
+
+    constructor(props: NavigationProps) {
+        super(props);
+
+        this.state = {
+            orderedNavigationItems: NavigationItems,
+            selectedPage: FocusAreaTypes.About
+        };
+        
+        this.handleNavigationClick = this.handleNavigationClick.bind(this);
     }
 
-    return (
-        <NavigationWrapper>
-            <FlipMove
-                duration={1000}
-                delay={0}
-                easing='ease-in-out'
-                staggerDelayBy={300}
-                enterAnimation="elevator" 
-                leaveAnimation="elevator"
-                staggerDurationBy={1}
-                typeName="ul">
-                <NavigationList>
-                    {orderedNavigationItems.map(i => {
-                        return (
-                            <NavigationItem
-                                $isSelected={selectedPage === i.type}
-                                onClick={() => handleNavigationClick(i.type)}>
-                                {i.text}
-                            </NavigationItem>
-                        )
-                    })}
-                </NavigationList>
-            </FlipMove>
-        </NavigationWrapper>
-    )
+    handleNavigationClick(item: FocusAreaTypes) {
+        this.setState({
+            orderedNavigationItems: [NavigationItems.find(i => i.type === item)!, ...this.state.orderedNavigationItems.filter(i => i.type !== item)],
+            selectedPage: item
+        })
+        this.props.setFocusAreaDisplay(item);
+    }
+
+    render() {
+        return (
+            <NavigationWrapper>
+                <FlipMove
+                    duration={700}
+                    delay={0}
+                    easing='ease-in-out'
+                    staggerDelayBy={20}
+                    enterAnimation="elevator"
+                    leaveAnimation="elevator"
+                    staggerDurationBy={15}
+                    typeName="ul">
+                    <NavigationList>
+                        {this.state.orderedNavigationItems.map(i => {
+                            return (
+                                <NavigationItem
+                                    key={i.type}
+                                    $isSelected={this.state.selectedPage === i.type}
+                                    onClick={() => this.handleNavigationClick(i.type)}>
+                                    {i.text}
+                                </NavigationItem>
+                            )
+                        })}
+                    </NavigationList>
+                </FlipMove>
+            </NavigationWrapper>
+        );
+    }
 }
