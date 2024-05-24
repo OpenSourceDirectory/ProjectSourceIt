@@ -13,7 +13,7 @@ const NavigationWrapper = styled.div`
 
 const NavigationList = styled.ul`
     padding: 10px;
-    border: 1px solid #EE004C;
+    border: 1px solid ${p => p.theme.secondary};
     border-radius: 50px;
     width: 100%;
     text-align: center;

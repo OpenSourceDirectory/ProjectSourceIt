@@ -4,6 +4,7 @@ import { IPallet } from './styles/ColorPallet';
 import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
 import { useState } from 'react';
+import { ProjectsPanelComponent } from './projectspanel/ProjectsPanelComponent';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -60,7 +61,7 @@ export const PageLayout = ({
 
                     <BottomRow>
                         <Column $widthPerc={35}>
-                            {'Feature Projects'}
+                            <ProjectsPanelComponent />
                         </Column>
                         
                         <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
