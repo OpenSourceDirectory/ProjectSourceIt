@@ -18,13 +18,12 @@ const TitleText = styled.div`
 `;
 
 const Squiggle = styled.div`
-    min-height: 30px;
-    max-height: 40px;
-    height: 35px;
+    height: 20px;
     width: 100%;
 
     background: ${p => p.theme.secondary};
     margin: 12px 0px;
+    border-radius: 20px;
 `;
 
 export const Title = () => {

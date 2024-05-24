@@ -19,11 +19,11 @@ export interface IPallet extends IPalletColors {
 export const LightPallet: IPallet = {
     type: ThemeType.light,
 
-    base: "#E8EFEC",
-    hover: "#CED9D4",
-    primary: "#343DEB",
-    secondary: "#FC03D7",
-    accent: "#EE004C"
+    base: "#F4F4F6",
+    hover: "#E5E5E9",
+    primary: "#480C69",
+    secondary: "#5C0932",
+    accent: "#45095A"
 };
 
 export const DarkPallet: IPallet = {

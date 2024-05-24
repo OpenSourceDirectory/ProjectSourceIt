@@ -26,9 +26,7 @@ export default function App() {
 	return (
 		<ThemeContext.Provider value={theme}>
 			<PageLayout theme={theme} toggleTheme={handleToggleTheme} />
-			<div style={{bottom: '0px', left: '0px', position: 'absolute'}}>
-				<PalletSelector pallet={theme} setPallet={handleSetTheme} />
-			</div>
+			{/* <PalletSelector pallet={theme} setPallet={handleSetTheme} /> */}
 		</ThemeContext.Provider>
 	);
 }
@@ -65,12 +63,11 @@ const PalletSelector = ({pallet, setPallet} : {pallet: IPalletColors, setPallet:
 	const handleChange = (color: any) => {
 		let newPallet = { ...pallet };
 		newPallet[palletProp as keyof IPalletColors] = color.hex as string;
-		console.log(`${palletProp}: ${color.hex}`);
 		setPallet(newPallet);
 	};
 
 	return (
-		<div>
+		<div style={{bottom: '0px', left: '0px', position: 'absolute'}}>
 			<SketchPicker
 				color={pallet[palletProp as keyof IPalletColors]}
 				onChange={handleChange} />
