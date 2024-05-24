@@ -1,0 +1,10 @@
+.projectspanelsearch-collapsed {
+    width: fit-content;
+    height: 30px;
+}
+  
+.projectspanelsearch-expanded {
+    height: 100px;
+    width: 100%;
+}
+  
