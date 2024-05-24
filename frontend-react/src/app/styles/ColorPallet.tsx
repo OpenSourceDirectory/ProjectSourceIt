@@ -4,14 +4,16 @@ export enum ThemeType {
 	dark
 }
 
-export interface IPallet {
-    type: ThemeType,
-
+export interface IPalletColors {
     base: string,
     hover: string,
     primary: string,
     secondary: string,
     accent: string,
+}
+
+export interface IPallet extends IPalletColors {
+    type: ThemeType,
 }
 
 export const LightPallet: IPallet = {
