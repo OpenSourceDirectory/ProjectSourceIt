@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Flipper, Flipped } from 'react-flip-toolkit'
+import { Flipper, Flipped } from 'react-flip-toolkit';
+
 
 const NavigationWrapper = styled.div`
     height: 100%;
@@ -18,7 +19,7 @@ const NavigationList = styled.ul`
     text-align: center;
 `;
 
-const NavigationItem = styled.div<{ $isSelected: boolean }>`
+const NavigationOption = styled.div<{ $isSelected: boolean }>`
     font-weight: ${p => p.$isSelected ? 600 : 500};
     font-size: ${p => p.$isSelected ? 22 : 20}px;
     padding: 2px 5px;
@@ -64,28 +65,29 @@ export const Navigation = ({
     const [selectedPage, setSelectedPage] = useState<FocusAreaTypes>(FocusAreaTypes.About);
     const [orderedNavigationItems, setOrderedNavigationItems] = useState<NavigationItem[]>(NavigationItems);
 
-    const handleNavigationClick = (item: FocusAreaTypes) => {
+    const handleNavigationClick = (item: NavigationItem) => {
         setOrderedNavigationItems([
-            NavigationItems.find(i => i.type === item)!,
-            ...orderedNavigationItems.filter(i => i.type !== item)
+            item,
+            ...orderedNavigationItems.filter(i => i !== item)
         ]);
-        setSelectedPage(item);
-        setFocusAreaDisplay(item);
+        setSelectedPage(item.type);
+        setFocusAreaDisplay(item.type);
     }
 
     return (
         <NavigationWrapper>
-            <Flipper flipKey={orderedNavigationItems.join('')}>
-                <NavigationList>
+            <Flipper flipKey={orderedNavigationItems.map(i => i.type).join('')}>
+                <NavigationList className="list">
                     {orderedNavigationItems.map(i => {
+                        const key = i.type;
                         return (
-                            <Flipped key={i.type}>
-                                <NavigationItem
-                                    key={i.type}
+                            <Flipped key={key} flipId={key}>
+                                <NavigationOption
+                                    key={key}
                                     $isSelected={selectedPage === i.type}
-                                    onClick={() => handleNavigationClick(i.type)}>
+                                    onClick={() => handleNavigationClick(i)}>
                                     {i.text}
-                                </NavigationItem>
+                                </NavigationOption>
                             </Flipped>
                         )
                     })}
