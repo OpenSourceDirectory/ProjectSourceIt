@@ -92,11 +92,11 @@ export const SearchPanelFilters = ({
             <FilterColumn>
                 {SearchFilterArray.map(f => {
                     const isSelected = f.type === openFilterType;
-                    const filterCount = typeFilterCounter(f.type);
+                    const filterCount = 7; //typeFilterCounter(f.type);
                     return (
-                        <Button onClick={() => setOpenFilterType(f.type)}>
+                        <Button onClick={() => setOpenFilterType(f.type)} key={f.type} style={{ height: '50px'}}>
                             <FilterColumnOptionTitle $isSelected={isSelected}>{f.text}</FilterColumnOptionTitle>
-                            {filterCount > 0 && <FilterColumnOptionCounter $isSelected={isSelected}>{f.text}</FilterColumnOptionCounter>}
+                            {f.type > 0 && <FilterColumnOptionCounter $isSelected={isSelected}>{f.type}</FilterColumnOptionCounter>}
                         </Button>
                     )
                 })}
@@ -106,6 +106,7 @@ export const SearchPanelFilters = ({
                 {FilterChoices.find(fc => fc.type === openFilterType)?.options.map(o => {
                     return (
                         <FilterTypeOptions
+                            key={o}
                             onClick={() => handleSetSelectedFilters(o)}
                             $isSelected={selectedFilters.includes(o)}>
                             {o}
