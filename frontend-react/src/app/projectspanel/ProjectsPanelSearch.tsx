@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Flipper, Flipped } from 'react-flip-toolkit'
-import useClickOutside, { useOutsideAlerter } from '../utilities/hooks';
+import { useClickOutside } from '../utilities/hooks';
+import { SearchPanelFilters } from './SearchPanelFilters';
+import { Input } from 'antd';
 
 const SearchWrapper = styled.div<{ $isExpanded: boolean }>`
     border: 2px solid ${p => p.theme.secondary};
@@ -10,13 +12,19 @@ const SearchWrapper = styled.div<{ $isExpanded: boolean }>`
     border-radius: 8px;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 8px;
     gap: 12px;
     
     &:hover {
         background: ${p => p.theme.hover};
     }
+`;
+
+const TopRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 `;
 
 const SearchCircle = styled.div`
@@ -26,16 +34,11 @@ const SearchCircle = styled.div`
     border-radius: 20px;
 `;
 
-const SearchText = styled.span`
-    color: ${p => p.theme.primary};
-    height: 20px;
-    border-bottom: 1px solid ${p => p.theme.accent};
-`;
-
 export const ProjectsPanelSearch = ({
 }: {
 }) => {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const [searchText, setSearchText] = useState<string>();
     const componentRef = useRef(null);
 
     useClickOutside(componentRef, () => {
@@ -46,8 +49,12 @@ export const ProjectsPanelSearch = ({
         <Flipper flipKey={isExpanded}>
             <Flipped flipId="expand">
                 <SearchWrapper ref={componentRef} $isExpanded={isExpanded} onClick={() => setIsExpanded(true)}>
-                    <SearchCircle />
-                    <SearchText>{'projects search'}</SearchText>
+                    <TopRow>
+                        <SearchCircle />
+                        <Input value={searchText} placeholder='Project keyword search' onChange={(e) => setSearchText(e.currentTarget.value)} />
+                    </TopRow>
+
+                    {isExpanded && <SearchPanelFilters />}
                 </SearchWrapper>
             </Flipped>
         </Flipper>
