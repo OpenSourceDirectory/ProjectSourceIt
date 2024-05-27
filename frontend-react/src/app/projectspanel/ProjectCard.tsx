@@ -4,7 +4,7 @@ import { Project } from '../models/project';
 
 const Card = styled.div`
     box-sizing: border-box;
-    border: 2px solid ${p => p.theme.cardBorder};
+    border: 2px solid ${p => p.theme.secondary};
     border-radius: 4px;
     background-color:  ${p => p.theme.base};
     height: fit-content;

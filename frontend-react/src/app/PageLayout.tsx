@@ -5,6 +5,7 @@ import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
 import { useState } from 'react';
 import { ProjectsPanelComponent } from './projectspanel/ProjectsPanelComponent';
+import { Background } from './components/Background';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -47,30 +48,32 @@ export const PageLayout = ({
     return (
         <ThemeProvider theme={theme}>
             <PageLayoutWrapper>
-                    <TopRow>
-                        <Column $widthPerc={70}>
-                            <Title />
-                        </Column>
+                <Background theme={theme} />
 
-                        <Column $widthPerc={30}>
-                            <Navigation focusAreaDisplay={focusArea} setFocusAreaDisplay={setFocusArea} />
-                        </Column>
+                <TopRow>
+                    <Column $widthPerc={70}>
+                        <Title />
+                    </Column>
 
-                        <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
-                    </TopRow>
+                    <Column $widthPerc={30}>
+                        <Navigation focusAreaDisplay={focusArea} setFocusAreaDisplay={setFocusArea} />
+                    </Column>
 
-                    <BottomRow>
-                        <Column $widthPerc={35}>
-                            <ProjectsPanelComponent />
-                        </Column>
-                        
-                        <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
+                    <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
+                </TopRow>
 
-                        <Column $widthPerc={65}>
-                            {NavigationItems[focusArea].text}
-                        </Column>
+                <BottomRow>
+                    <Column $widthPerc={35}>
+                        <ProjectsPanelComponent />
+                    </Column>
+                    
+                    <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
 
-                    </BottomRow>
+                    <Column $widthPerc={65}>
+                        {NavigationItems[focusArea].text}
+                    </Column>
+
+                </BottomRow>
 
             </PageLayoutWrapper>
         </ThemeProvider>
