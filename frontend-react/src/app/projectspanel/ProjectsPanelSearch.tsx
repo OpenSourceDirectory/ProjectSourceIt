@@ -10,6 +10,7 @@ const SearchWrapper = styled.div<{ $isExpanded: boolean }>`
     width: ${p => p.$isExpanded ? '80%' : '300px'};
     height: ${p => p.$isExpanded ? '300px' : 'fit-content'};
     border-radius: 8px;
+    margin: 8px 20px;
 
     display: flex;
     flex-direction: column;

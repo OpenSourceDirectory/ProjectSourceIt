@@ -10,6 +10,7 @@ export interface IPalletColors {
     primary: string,
     secondary: string,
     accent: string,
+    cardBorder: string
 }
 
 export interface IPallet extends IPalletColors {
@@ -23,7 +24,8 @@ export const LightPallet: IPallet = {
     hover: "#E5E5E9",
     primary: "#480C69",
     secondary: "#5C0932",
-    accent: "#45095A"
+    accent: "#45095A",
+    cardBorder: "#DDBD8E"
 };
 
 export const DarkPallet: IPallet = {
@@ -33,5 +35,6 @@ export const DarkPallet: IPallet = {
     hover: "#073359",
     primary: "#3E0085",
     secondary: "#00ABF7",
-    accent: "#FF85DF"
+    accent: "#FF85DF",
+    cardBorder: "#DDBD8E"
 };

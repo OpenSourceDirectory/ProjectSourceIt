@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { ProjectCard } from './ProjectCard';
+import { DummyProjectData } from '../models/project';
 
-const Card = styled.div`
-    border: 2px solid ${p => p.theme.secondary};
-    border-radius: 4px;
-    background-color:  ${p => p.theme.base};
-    height: 50px;
-    width: 100%;
-`
+const ProjectsPanelResultsWrapper = styled.div`
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+`;
 
 
 export const ProjectsPanelResults = ({
 }: {
 }) => {
 
-
     return (
-        <div>
-        <div>{"These are the results you're after"}</div>
-        <Card>{'First project'}</Card>
-        </div>
+        <ProjectsPanelResultsWrapper>
+            {DummyProjectData.map(p => {
+                return <ProjectCard key={p.id} data={p} />
+            })}
+        </ProjectsPanelResultsWrapper>
     )
 }

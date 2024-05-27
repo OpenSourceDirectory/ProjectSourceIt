@@ -2,6 +2,10 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { numberCommonItems } from '../utilities/hooks';
+import { LifecycleLookup } from '../models/Lifecycle';
+import { ProjectTypeDict as ProjectTypeDict } from '../models/ProjectType';
+import { PlatformTypeLookup } from '../models/PlatformType';
+import { KeyValue } from '../models/KeyValue';
 
 const SearchPanelFiltersWrapper = styled.div`
     display: flex;
@@ -43,31 +47,22 @@ const FilterTypeOptions = styled.div<{ $isSelected: boolean }>`
 export enum SearchFilterType {
     Languages,
     ProjectType,
-    ProjectState
+    PlatformType,
+    ProjectLifeCycle
 }
 
 export interface SearchFilter {
     type: SearchFilterType,
-    text: string
+    text: string,
+    options: KeyValue[]
 }
 
-const SearchFilterArray: SearchFilter[] = [
-    { type: SearchFilterType.Languages, text: 'Languages' },
-    { type: SearchFilterType.ProjectType, text: 'Project Type' },
-    { type: SearchFilterType.ProjectState, text: 'Project State' }
+const SearchFilterOptions: SearchFilter[] = [
+    { type: SearchFilterType.Languages, text: 'Languages', options: [{key: 0, value: 'C#'}] },
+    { type: SearchFilterType.ProjectType, text: 'Project Type', options: ProjectTypeDict },
+    { type: SearchFilterType.ProjectLifeCycle, text: 'Project State', options: ProjectTypeDict },
+    { type: SearchFilterType.PlatformType, text: 'Platform type', options: PlatformTypeLookup }
 ];
-
-
-export interface FilterChoice {
-    type: SearchFilterType,
-    options: string[]
-}
-
-const FilterChoices: FilterChoice[] = [
-    { type: SearchFilterType.Languages, options: ['C#', 'Python', 'Javascript', 'GO'] },
-    { type: SearchFilterType.ProjectType, options: ['Web application', 'Mobile application', 'Mobile game', 'Indi game', 'Engine'] },
-    { type: SearchFilterType.ProjectState, options: ['Idea', 'Initial', 'MVP', 'Feature Flow', 'Maintenance', 'End of life'] }
-]
 
 export const SearchPanelFilters = ({
 }: {
@@ -84,13 +79,13 @@ export const SearchPanelFilters = ({
     }
 
     const typeFilterCounter = (type: SearchFilterType) => {
-        return numberCommonItems(FilterChoices.find(fc => fc.type === type), selectedFilters);
+        return numberCommonItems(SearchFilterOptions.find(fc => fc.type === type), selectedFilters);
     }
 
     return (
         <SearchPanelFiltersWrapper>
             <FilterColumn>
-                {SearchFilterArray.map(f => {
+                {SearchFilterOptions.map(f => {
                     const isSelected = f.type === openFilterType;
                     const filterCount = 7; //typeFilterCounter(f.type);
                     return (
@@ -103,13 +98,13 @@ export const SearchPanelFilters = ({
             </FilterColumn>
 
             <FilterOptions>
-                {FilterChoices.find(fc => fc.type === openFilterType)?.options.map(o => {
+                {SearchFilterOptions.find(fc => fc.type === openFilterType)?.options.map(o => {
                     return (
                         <FilterTypeOptions
-                            key={o}
-                            onClick={() => handleSetSelectedFilters(o)}
-                            $isSelected={selectedFilters.includes(o)}>
-                            {o}
+                            key={o.key}
+                            onClick={() => handleSetSelectedFilters(o.value)}
+                            $isSelected={selectedFilters.includes(o.value)}>
+                            {o.value}
                         </FilterTypeOptions>
                     )
                 })}
