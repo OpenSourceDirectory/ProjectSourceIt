@@ -21,14 +21,14 @@ const Card = styled.div`
 `;
 
 const CardTitle = styled.div`
-    font-size: 18px;
+    font-size: 22px;
     color: ${p => p.theme.primary};
     font-weight: 600;
     text-align: center;
 `;
 
 const CardBlurb = styled.div`
-    font-size: 14px;
+    font-size: 18px;
     color: ${p => p.theme.secondary};
     font-weight: 400;
 `;

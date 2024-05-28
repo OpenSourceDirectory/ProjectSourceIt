@@ -6,6 +6,7 @@ import ToggleButton from './components/ToggleButton';
 import { useState } from 'react';
 import { ProjectsPanelComponent } from './projectspanel/ProjectsPanelComponent';
 import { Background } from './components/Background';
+import { FocusArea } from './FocusArea';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -35,6 +36,12 @@ const BottomRow = styled.div`
 const Column = styled.div<{ $widthPerc: Number }>`
     width: ${p => p.$widthPerc.toString()}%;
     margin: 0px 12px;
+`;
+
+const Separator = styled.div`
+    background-color: ${p => p.theme.secondary};
+    width: 8px;
+    borderRadius: 4px;
 `;
 
 
@@ -67,10 +74,10 @@ export const PageLayout = ({
                         <ProjectsPanelComponent />
                     </Column>
                     
-                    <div style={{ backgroundColor: theme.secondary, width: '8px', borderRadius: '4px' }} />
+                    <Separator />
 
                     <Column $widthPerc={65}>
-                        {NavigationItems[focusArea].text}
+                        <FocusArea displayPage={focusArea} />
                     </Column>
 
                 </BottomRow>

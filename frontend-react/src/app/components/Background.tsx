@@ -5,7 +5,7 @@ export const Background = ({theme}: {theme: IPalletColors}) => (
     <svg
         xmlnsXlink="http://www.w3.org/1999/xlink"
         id="wave"
-        height="30%"
+        height="25%"
         width="100%"
         preserveAspectRatio="none"
         style={{
