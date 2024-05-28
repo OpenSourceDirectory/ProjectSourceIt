@@ -1,47 +1,54 @@
-import React from 'react';
-import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useContext } from 'react';  
 import { Steps } from 'antd';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LightBulb } from '../icons/LightBulb';
+import { Plan } from '../icons/Plan';
+import { Develop } from '../icons/Develop';
+import { Flow } from '../icons/Flow';
+import { Maintenance } from '../icons/Maintenance';
+import { End } from '../icons/End';
 
 const DiagramWrapper = styled.div`
 
 `;
 
 export const ProjectFlowDiagram = () => {
+	const theme = useContext(ThemeContext);
     return (
         <DiagramWrapper>
             <Steps
+                style={{ color: theme?.primary }}
                 items={[
                 {
                     title: 'Idea',
                     status: 'finish',
-                    icon: <UserOutlined />,
+                    icon: <LightBulb />,
                 },
                 {
                     title: 'Initialise',
                     status: 'finish',
-                    icon: <SolutionOutlined />,
+                    icon: <Plan />,
                 },
                 {
                     title: 'MVP',
                     status: 'finish',
-                    icon: <LoadingOutlined />,
+                    icon: <Develop />,
                 },
                 {
                     title: 'Feature Flow',
                     status: 'finish',
-                    icon: <LoadingOutlined />,
+                    icon: <Flow />,
                 },
                 {
                     title: 'Maintenance',
                     status: 'finish',
-                    icon: <SmileOutlined />,
+                    icon: <Maintenance />,
                 },
                 {
                     title: 'End Of Life',
                     status: 'finish',
-                    icon: <LoadingOutlined />,
-                },
+                    icon: <End />,
+                }
                 ]}
             />
         </DiagramWrapper>

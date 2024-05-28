@@ -29,8 +29,9 @@ const BoldenText = styled(BaseText)`
 
 const ProjectFlowDiagramWrapper = styled.div`
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     width: 100%;
+    text-align: center;
 `;
 
 export const AboutPage = () => {
@@ -71,7 +72,10 @@ export const AboutPage = () => {
                 </BaseText>
             </TextBlockWrapper>
 
-            <ProjectFlowDiagramWrapper><ProjectFlowDiagram /></ProjectFlowDiagramWrapper>
+            <ProjectFlowDiagramWrapper>
+                <BoldenText>Project states</BoldenText>
+                <ProjectFlowDiagram />
+            </ProjectFlowDiagramWrapper>
         </AboutPageWrapper>
     )
 }
