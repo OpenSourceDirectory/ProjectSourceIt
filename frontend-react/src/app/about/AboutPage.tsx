@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { PageTitle } from "../components/PageTitle";
 import { ProjectFlowDiagram } from "./ProjectFlowDiagram";
 
-
 const AboutPageWrapper = styled.div`
-`;
+    position: relative;
+    width: 100%;
+    height: 100%;
+`
 
 const TextBlockWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-top: 24px;
-    margin-bottom: 24px;
-`
+`;
 
 const BaseText = styled.span`
     text-align: center;
@@ -26,6 +27,12 @@ const BoldenText = styled(BaseText)`
     color: ${p => p.theme.secondary};
 `;
 
+const ProjectFlowDiagramWrapper = styled.div`
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+`;
+
 export const AboutPage = () => {
     return (
         <AboutPageWrapper>
@@ -33,7 +40,7 @@ export const AboutPage = () => {
 
             <TextBlockWrapper>
                 <BaseText>
-                    Open Source Directory is an initiative to allow greater 
+                    Open Source Directory is an initiative to allow greater
                     <BoldenText>  collaboration  </BoldenText>
                     and
                     <BoldenText>  disclosure  </BoldenText>
@@ -48,9 +55,9 @@ export const AboutPage = () => {
 
                 <BaseText>
                     This tool has
-                    <BoldenText>  something for everyone  </BoldenText>
+                    <BoldenText>  something for everyone</BoldenText>
                     , from a new comer looking for a way to learn pragmatically,
-                    to a seasoned pro waiting for the right next thing to sink their teeth into.
+                    to a seasoned pro waiting for the next best thing to sink their teeth into.
                 </BaseText>
 
                 <BaseText>
@@ -59,12 +66,12 @@ export const AboutPage = () => {
                 </BaseText>
 
                 <BaseText>
-                    Get started by either searching throughout the collection of @promoted@ projects
+                    Get started by either searching throughout the collection of @promoted@ projects,
                     or by submitting your own project for others to ponder over.
                 </BaseText>
             </TextBlockWrapper>
 
-            <ProjectFlowDiagram />
+            <ProjectFlowDiagramWrapper><ProjectFlowDiagram /></ProjectFlowDiagramWrapper>
         </AboutPageWrapper>
     )
 }

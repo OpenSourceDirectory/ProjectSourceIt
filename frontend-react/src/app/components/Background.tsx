@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { IPalletColors } from '../styles/ColorPallet';
 
+export const BackgroundHeight = 25;
+const height = `${BackgroundHeight}%`;
+
 export const Background = ({theme}: {theme: IPalletColors}) => (
     <svg
         xmlnsXlink="http://www.w3.org/1999/xlink"
         id="wave"
-        height="25%"
+        height={height}
         width="100%"
         preserveAspectRatio="none"
         style={{

@@ -32,8 +32,8 @@ export const FocusArea = ({
     }
 
     return (
-        <FocusAreaWrapper>
+        <>
             {page}
-        </FocusAreaWrapper>
+        </>
     )
 }

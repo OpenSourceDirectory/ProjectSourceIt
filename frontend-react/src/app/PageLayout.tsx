@@ -5,7 +5,7 @@ import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
 import { useState } from 'react';
 import { ProjectsPanelComponent } from './projectspanel/ProjectsPanelComponent';
-import { Background } from './components/Background';
+import { Background, BackgroundHeight } from './components/Background';
 import { FocusArea } from './FocusArea';
 
 const PageLayoutWrapper = styled.div`
@@ -26,16 +26,20 @@ const TopRow = styled.div`
     margin: 12px;
 `;
 
+const BottomRowHeight = 90;
 const BottomRow = styled.div`
-    height: 90%;
+    height: ${BottomRowHeight}%;
     display: flex;
     flex-direction: row;
     margin: 12px;
 `;
 
-const Column = styled.div<{ $widthPerc: Number }>`
+// Height reduction is so nothing overlaps with the Background component.
+const HeightReduction = 100 - ((90 / 100) * BackgroundHeight);
+const Column = styled.div<{ $widthPerc: Number, $heightReduction?: boolean }>`
     width: ${p => p.$widthPerc.toString()}%;
     margin: 0px 12px;
+    ${p => p.$heightReduction ? `height: ${HeightReduction}%;` : ''}
 `;
 
 const Separator = styled.div`
@@ -70,13 +74,13 @@ export const PageLayout = ({
                 </TopRow>
 
                 <BottomRow>
-                    <Column $widthPerc={35}>
+                    <Column $widthPerc={35} $heightReduction>
                         <ProjectsPanelComponent />
                     </Column>
                     
                     <Separator />
 
-                    <Column $widthPerc={65}>
+                    <Column $widthPerc={65} $heightReduction>
                         <FocusArea displayPage={focusArea} />
                     </Column>
 
