@@ -9,6 +9,7 @@ import { Maintenance } from '../icons/Maintenance';
 import { End } from '../icons/End';
 import { Exit } from '../icons/Exit';
 import './ProjectFlowDiagram.css'
+import { IconWrapper } from '../icons/IconWrapper';
 
 const DiagramWrapper = styled.div`
     display: flex;
@@ -21,12 +22,6 @@ const IconWithDescriptionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-`;
-
-const IconWrapper = styled.div`
-    &:hover {
-        background: ${p => p.theme.hover};
-    }
 `;
 
 const DescriptionTextWrapper = styled.div`
@@ -45,9 +40,6 @@ const DescriptionText = styled.span`
     align-items: center;
 `;
 
-const CloseDescriptionWrapper = styled.div`
-`;
-
 const IconWithDescription = ({
     icon,
     onClickHandle
@@ -57,7 +49,7 @@ const IconWithDescription = ({
 }) => {
     return (
         <IconWithDescriptionWrapper>
-            <IconWrapper onClick={onClickHandle}>{icon}</IconWrapper>
+            <IconWrapper onClickHandle={onClickHandle}>{icon}</IconWrapper>
         </IconWithDescriptionWrapper>
     )
 }
@@ -148,7 +140,7 @@ export const ProjectFlowDiagram = () => {
             />
             {stepDescriptionShowing &&
             <DescriptionTextWrapper>
-                <CloseDescriptionWrapper onClick={() => setStepDescriptionShowing(undefined)}><Exit /></CloseDescriptionWrapper>
+                <IconWrapper onClickHandle={() => setStepDescriptionShowing(undefined)}><Exit width={16} height={16} /></IconWrapper>
                 <DescriptionText>{description}</DescriptionText>
             </DescriptionTextWrapper>}
         </DiagramWrapper>
