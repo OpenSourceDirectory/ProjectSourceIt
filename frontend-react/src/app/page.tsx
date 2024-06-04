@@ -1,16 +1,24 @@
 'use client'
 
-import { createContext, useState } from 'react';
+import { createContext, useReducer, useState } from 'react';
 import { PageLayout } from './PageLayout';
 import { DarkPallet, IPallet, IPalletColors, LightPallet, ThemeType } from './styles/ColorPallet';
 import { SketchPicker } from 'react-color';
 import { Button, Dropdown, MenuProps } from 'antd';
+import { initialState, reducer } from "./store/reducer/index";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Login';
+import Home from './Home';
+
+const blah: any = { state: {}, dispatch: () => {} }
 
 export const ThemeContext = createContext(LightPallet);
+export const AuthContext = createContext(blah);
 
 // TODO get default theme from browser and apply that one.
 export default function App() {
 	const [theme, setTheme] = useState<IPallet>(LightPallet);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
 	function handleToggleTheme() {
 		setTheme(prevTheme => prevTheme.type === ThemeType.dark ? LightPallet : DarkPallet);
@@ -25,8 +33,16 @@ export default function App() {
 	
 	return (
 		<ThemeContext.Provider value={theme}>
-			<PageLayout theme={theme} toggleTheme={handleToggleTheme} />
-			{/* <PalletSelector pallet={theme} setPallet={handleSetTheme} /> */}
+			<AuthContext.Provider value={{state, dispatch}}>
+				<Router>
+					<Routes>
+						<Route path="/login" element={<Login />}/>
+						<Route path="/" element={<Home />}/>
+					</Routes>
+				</Router>
+				<PageLayout theme={theme} toggleTheme={handleToggleTheme} />
+				{/* <PalletSelector pallet={theme} setPallet={handleSetTheme} /> */}
+			</AuthContext.Provider>
 		</ThemeContext.Provider>
 	);
 }

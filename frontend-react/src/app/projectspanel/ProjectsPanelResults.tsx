@@ -7,6 +7,8 @@ const ProjectsPanelResultsWrapper = styled.div`
     gap: 8px;
     display: flex;
     flex-direction: column;
+
+    overflow-y: auto;
 `;
 
 
