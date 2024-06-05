@@ -1,3 +1,6 @@
+const { LocalStorage } = require('node-localstorage');
+const localStorage = new LocalStorage('./scratch');
+
 export const initialState = {
     isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
     user: JSON.parse(localStorage.getItem("user")) || null,
@@ -7,7 +10,7 @@ export const initialState = {
     proxy_url: process.env.REACT_APP_PROXY_URL
 };
 
-export const reducer = (state, action) => {
+export const reducer = (state: any, action: any) => {
     switch (action.type) {
         case "LOGIN": {
             localStorage.setItem("isLoggedIn", JSON.stringify(action.payload.isLoggedIn))

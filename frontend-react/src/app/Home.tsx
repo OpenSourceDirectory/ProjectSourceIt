@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import Styled from "styled-components";
-import { AuthContext } from "./page";
+import { AuthContext } from "./providers/AuthProvider";
 
 
 export default function Home() {

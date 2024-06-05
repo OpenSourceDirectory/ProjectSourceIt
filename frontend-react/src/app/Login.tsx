@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import Styled from "styled-components";
 import { Github } from "./icons/Github";
-import { AuthContext } from "./page";
+import { AuthContext } from "./providers/AuthProvider";
 
 
 export default function Login() {
@@ -11,6 +11,9 @@ export default function Login() {
   const [data, setData] = useState({ errorMessage: "", isLoading: false });
 
   const { client_id, redirect_uri } = state;
+
+  console.log('Client id', client_id);
+  console.log('redirect_uri id', redirect_uri);
 
   useEffect(() => {
     // After requesting Github access, Github redirects back to your app with a code parameter
@@ -28,6 +31,10 @@ export default function Login() {
       };
 
       const proxy_url = state.proxy_url;
+
+      if (!proxy_url) {
+        return;
+      }
 
       // Use code parameter and other parameters to make POST request to proxy_server
       fetch(proxy_url, {
