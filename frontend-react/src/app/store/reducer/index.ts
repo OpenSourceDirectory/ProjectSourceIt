@@ -1,6 +1,3 @@
-const { LocalStorage } = require('node-localstorage');
-const localStorage = new LocalStorage('./scratch');
-
 export const initialState = {
     isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
     user: JSON.parse(localStorage.getItem("user")) || null,

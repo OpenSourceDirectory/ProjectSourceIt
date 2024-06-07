@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { ProjectCard } from './ProjectCard';
-import { DummyProjectData } from '../models/project';
+import { DummyProjectData } from '../models/Project';
 
 const ProjectsPanelResultsWrapper = styled.div`
     gap: 8px;
