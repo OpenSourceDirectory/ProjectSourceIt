@@ -1,3 +1,5 @@
+'use client'
+
 import { ThemeType } from '../styles/ColorPallet';
 import './ToggleButton.css';
 

@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { Project } from '../models/project';
+import { Project } from '../models/Project';
 
 const Card = styled.div`
     box-sizing: border-box;

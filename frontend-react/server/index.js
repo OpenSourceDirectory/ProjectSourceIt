@@ -1,6 +1,3 @@
-'use server'
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const FormData = require("form-data");

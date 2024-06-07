@@ -1,6 +1,8 @@
+'use client' // TODO stift where the state logic is
+
 import styled, { ThemeProvider } from 'styled-components';
 import { Title } from './components/Title';
-import { IPallet } from './styles/ColorPallet';
+import { IPallet, ThemeType } from './styles/ColorPallet';
 import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
 import { useContext, useState } from 'react';
@@ -10,6 +12,7 @@ import { FocusArea } from './FocusArea';
 import { AuthContext } from './providers/AuthProvider';
 import { Login } from './components/Login';
 import { Account } from './components/Account';
+import { ThemeContext } from './providers/ThemeProvider';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -53,12 +56,9 @@ const Separator = styled.div`
 `;
 
 
-export const PageLayout = ({ 
-    theme, toggleTheme
-}:{ 
-    theme: IPallet, toggleTheme: () => void
-}) => {
+export const PageLayout = () => {
     const { state, dispatch } = useContext(AuthContext);
+    const { theme, dispatchTheme } = useContext(ThemeContext);
     const [focusArea, setFocusArea] = useState<FocusAreaTypes>(FocusAreaTypes.About);
 
     return (
@@ -84,7 +84,7 @@ export const PageLayout = ({
                             }
 
                             <div style={{ marginLeft: 'auto'}}>
-                                <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
+                                <ToggleButton themeType={theme.type} toggleTheme={() => dispatchTheme(theme.type === ThemeType.dark ? ThemeType.light : ThemeType.dark)} />
                             </div>
                         </Row>
                     </Column>

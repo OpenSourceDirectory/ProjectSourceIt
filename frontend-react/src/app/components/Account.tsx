@@ -1,3 +1,4 @@
+'use client'
 
 import Styled from "styled-components";
 import { AuthContext } from "../providers/AuthProvider";

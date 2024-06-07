@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { ProjectCard } from './ProjectCard';
 import { DummyProjectData } from '../models/Project';

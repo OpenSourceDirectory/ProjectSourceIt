@@ -1,22 +1,17 @@
-"use client"
-
-import { useContext } from "react";
 import { PageLayout } from "../PageLayout"
 import { AuthProvider } from "../providers/AuthProvider"
-import { ThemeContext } from "../page";
+import { ThemeProvider } from "../providers/ThemeProvider";
 
 // Pretty much a duplication of src\app\page.tsx
-export default function HomePage() {
-    const theme = useContext(ThemeContext);
-    
+export default function HomePage() {    
     console.log('On home page now');
     
     return (
-		<ThemeContext.Provider value={theme}>
+		<ThemeProvider>
 			<AuthProvider>
-				<PageLayout theme={theme} toggleTheme={() => void 0} />
+				<PageLayout />
 				{/* <PalletSelector pallet={theme} setPallet={handleSetTheme} /> */}
 			</AuthProvider>
-		</ThemeContext.Provider>
+		</ThemeProvider>
 	);
 }

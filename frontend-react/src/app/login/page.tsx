@@ -1,4 +1,5 @@
-"use client"
+'use client'
+
 
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";

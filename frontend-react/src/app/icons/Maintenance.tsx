@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext } from "../page";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 export const Maintenance = () => {
     const theme = useContext(ThemeContext);

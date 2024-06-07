@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useContext, useState } from 'react';  
 import { Steps } from 'antd';
 import styled, { ThemeContext } from 'styled-components';

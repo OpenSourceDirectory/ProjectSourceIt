@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Flipper, Flipped } from 'react-flip-toolkit'
