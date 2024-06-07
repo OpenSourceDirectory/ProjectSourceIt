@@ -10,6 +10,7 @@ import { SketchPicker } from 'react-color';
 import { Button, Dropdown, MenuProps } from 'antd';
 import { AuthProvider } from './providers/AuthProvider';
 
+// TODO Switch to use reducer so that able to be changed elsewhere.
 export const ThemeContext = createContext(LightPallet);
 
 // TODO get default theme from browser and apply that one.

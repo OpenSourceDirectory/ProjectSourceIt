@@ -9,6 +9,17 @@ const nextConfig = {
         REACT_APP_PROXY_URL: 'http://localhost:5000/authenticate',
         SERVER_PORT: '5000',
     },
+    
 }
    
 module.exports = nextConfig
+
+// async redirects() {
+//     return [
+//       {
+//         source: '/Login',
+//         destination: '/',
+//         permanent: true,
+//       },
+//     ]
+//   },
