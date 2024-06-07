@@ -3,16 +3,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useRouter } from 'next/navigation'
+import { envIndex } from "../store/EnvIndex";
 
 export default function LoginPage() {
     const router = useRouter();
     const { state, dispatch } = useContext(AuthContext);
     const [data, setData] = useState({ errorMessage: "", isLoading: false });
 
+    console.log('display login page');
+
     useEffect(() => {
         // After requesting Github access, Github redirects back to your app with a code parameter
         const url = window.location.href;
         const hasCode = url.includes("?code=");
+        
+        console.log('hasCode', hasCode);
 
         // If Github API returns the code parameter
         if (hasCode) {
@@ -23,15 +28,18 @@ export default function LoginPage() {
             const requestData = {
                 code: newUrl[1]
             };
+        
+            console.log('requestData', requestData);
+            console.log('envIndex', envIndex, envIndex.proxy_url);
 
-            const proxy_url = state.proxy_url;
-
-            if (!proxy_url) {
+            if (!envIndex.proxy_url) {
                 return;
             }
 
+            console.log('Do a fetch then');
+
             // Use code parameter and other parameters to make POST request to proxy_server
-            fetch(proxy_url, {
+            fetch(envIndex.proxy_url, {
                 method: "POST",
                 body: JSON.stringify(requestData)
             })
@@ -41,6 +49,8 @@ export default function LoginPage() {
                         type: "LOGIN",
                         payload: { user: data, isLoggedIn: true }
                     });
+
+                    console.log('user data is', data);
 
                     // Navigate back to the main layout now.
                     router.push('/Home');

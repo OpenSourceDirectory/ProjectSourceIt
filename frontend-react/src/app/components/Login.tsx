@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { AuthContext } from "../providers/AuthProvider";
 import { Github } from "../icons/Github";
+import { envIndex } from "../store/EnvIndex";
 
 const Wrapper = styled.section`
 `;
@@ -22,13 +22,15 @@ const LinkText = styled.div`
 `;
 
 export const Login = () => {
-    const { state } = useContext(AuthContext);
-    const { client_id, redirect_uri } = state;
+    const { client_id, redirect_uri } = envIndex;
+
+    const loginLink = `https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`;
+    console.log('loggin github link', loginLink)
 
     return (
         <Wrapper>
             <LoginLink
-                href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
+                href={loginLink}
             >
                 <LinkText>Github sign in</LinkText>
                 <Github />

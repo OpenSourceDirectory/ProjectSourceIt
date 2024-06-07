@@ -7,10 +7,22 @@ const Wrapper = Styled.section`
     
 `;
 
+interface GithubAccountDetails {
+    avatar_url: string;
+    name: string;
+    public_repos: any; //string[];
+    followers: any;
+    following: any;
+}
+
 export const Account = () => {
     const { state, dispatch } = useContext(AuthContext);
 
-    const { avatar_url, name, public_repos, followers, following } = state.user
+    if (state === null || state.user === null) {
+        return null;
+    }
+
+    const { avatar_url, name, public_repos, followers, following } = jsonToObject<GithubAccountDetails>(state.user)
 
     const handleLogout = () => {
         dispatch({

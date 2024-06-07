@@ -1,12 +1,20 @@
+'use server'
+
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const FormData = require("form-data");
 const fetch = require("node-fetch");
-const { client_id, redirect_uri, client_secret } = require("./config");
-
-const config = require("./config");
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+//const { client_id, redirect_uri, client_secret } = require("./config");
+const client_id = 'Ov23ctbV5RpBa3cLNeqe';
+client_secret = '1d7698ccd4f4295003493202b6ec6986fe623480';
+const redirect_uri = 'http://localhost:3000/login';
 
 const app = express();
+
+console.log('Recognising the server index');
 
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: "text/*" }));
