@@ -9,10 +9,9 @@ export const AuthContext = createContext<{
 	dispatch: () => null,
 });
 
+// TODO, still need to get localstorage working. But otherwise not too bad!
 export const AuthProvider = (props: any) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
-
-	console.log('state', state);
 
 	return (<AuthContext.Provider value={{ state, dispatch }}>{props.children}</AuthContext.Provider>)
 }

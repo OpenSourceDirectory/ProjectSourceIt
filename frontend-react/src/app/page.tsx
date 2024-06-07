@@ -8,9 +8,6 @@ import { PageLayout } from './PageLayout';
 import { DarkPallet, IPallet, IPalletColors, LightPallet, ThemeType } from './styles/ColorPallet';
 import { SketchPicker } from 'react-color';
 import { Button, Dropdown, MenuProps } from 'antd';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Login';
-import Home from './Home';
 import { AuthProvider } from './providers/AuthProvider';
 
 export const ThemeContext = createContext(LightPallet);
@@ -18,9 +15,6 @@ export const ThemeContext = createContext(LightPallet);
 // TODO get default theme from browser and apply that one.
 export default function App() {
 	const [theme, setTheme] = useState<IPallet>(LightPallet);
-	
-
-	console.log('env', process.env.REACT_APP_CLIENT_ID);
 
 	function handleToggleTheme() {
 		setTheme(prevTheme => prevTheme.type === ThemeType.dark ? LightPallet : DarkPallet);
@@ -36,12 +30,6 @@ export default function App() {
 	return (
 		<ThemeContext.Provider value={theme}>
 			<AuthProvider>
-				<Router>
-					<Routes>
-						<Route path="/login" element={<Login />}/>
-						<Route path="/" element={<Home />}/>
-					</Routes>
-				</Router>
 				<PageLayout theme={theme} toggleTheme={handleToggleTheme} />
 				{/* <PalletSelector pallet={theme} setPallet={handleSetTheme} /> */}
 			</AuthProvider>

@@ -3,10 +3,13 @@ import { Title } from './components/Title';
 import { IPallet } from './styles/ColorPallet';
 import { FocusAreaTypes, Navigation, NavigationItems } from './Navigation';
 import ToggleButton from './components/ToggleButton';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ProjectsPanelComponent } from './projectspanel/ProjectsPanelComponent';
 import { Background, BackgroundHeight } from './components/Background';
 import { FocusArea } from './FocusArea';
+import { AuthContext } from './providers/AuthProvider';
+import { Login } from './components/Login';
+import { Account } from './components/Account';
 
 const PageLayoutWrapper = styled.div`
     height: 100%;
@@ -16,22 +19,23 @@ const PageLayoutWrapper = styled.div`
     flex-direction: column;
 `;
 
-const TopRow = styled.div`
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const TopRow = styled(Row)`
     min-height: 150px;
     max-height: 250px;
     width: 98%;
     height: 10%;
-    display: flex;
-    flex-direction: row;
     margin: 12px;
 `;
 
 const BottomRowHeight = 90;
-const BottomRow = styled.div`
+const BottomRow = styled(Row)`
     height: ${BottomRowHeight}%;
     display: flex;
-    flex-direction: row;
-    margin: 12px;
 `;
 
 // Height reduction is so nothing overlaps with the Background component.
@@ -54,6 +58,7 @@ export const PageLayout = ({
 }:{ 
     theme: IPallet, toggleTheme: () => void
 }) => {
+    const { state, dispatch } = useContext(AuthContext);
     const [focusArea, setFocusArea] = useState<FocusAreaTypes>(FocusAreaTypes.About);
 
     return (
@@ -62,15 +67,27 @@ export const PageLayout = ({
                 <Background theme={theme} />
 
                 <TopRow>
-                    <Column $widthPerc={70}>
+                    <Column $widthPerc={65}>
                         <Title />
                     </Column>
 
                     <Column $widthPerc={30}>
                         <Navigation focusAreaDisplay={focusArea} setFocusAreaDisplay={setFocusArea} />
                     </Column>
+                    
+                    <Column $widthPerc={15} style={{ marginLeft: 'auto' }}>
+                        <Row>
+                            {!state.isLoggedIn ?
+                                <Login />
+                            :
+                                <Account />
+                            }
 
-                    <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
+                            <div style={{ marginLeft: 'auto'}}>
+                                <ToggleButton themeType={theme.type} toggleTheme={toggleTheme} />
+                            </div>
+                        </Row>
+                    </Column>
                 </TopRow>
 
                 <BottomRow>
